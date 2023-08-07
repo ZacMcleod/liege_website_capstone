@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car
+from database.models import User, Car, Review, Question, ClothingItem
 
 ma = Marshmallow()
 
@@ -15,8 +15,9 @@ class RegisterSchema(ma.Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.String(required=True)
+    is_admin = fields.Boolean(required=True)
     class Meta:
-        fields = ("id", "username",  "password", "first_name", "last_name", "email")
+        fields = ("id", "username", "password", "first_name", "last_name", "email", "is_admin")
 
     @post_load
     def create_user(self, data, **kwargs):
@@ -31,8 +32,9 @@ class UserSchema(ma.Schema):
     first_name = fields.String(required=True)
     last_name = fields.String(required=True)
     email = fields.String(required=True)
+    is_admin = fields.Boolean(required=True)
     class Meta:
-        fields = ("id", "username", "first_name", "last_name", "email",)
+        fields = ("id", "username", "first_name", "last_name", "email", "is_admin")
 
 register_schema = RegisterSchema()
 user_schema = UserSchema()
@@ -59,3 +61,46 @@ cars_schema = CarSchema(many=True)
 
 
 # TODO: Add your schemas below
+
+
+class ReviewSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    clothing_item_id = fields.Integer(required=True)
+    review_text = fields.String(required=False)
+    rating = fields.Integer(required=False)
+    user_id = fields.Integer(required=True)
+
+    @post_load
+    def create_review(self, data, **kwargs):
+        return Review(**data)
+
+class ClothingItemSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    type = fields.String(required=True)
+    description = fields.String(required=True)
+    color = fields.String(required=True)
+    size = fields.String(required=True)
+    date = fields.Date(required=False)
+    price = fields.Float(required=True)
+    picture = fields.String(required=True)
+
+    @post_load
+    def create_clothing_item(self, data, **kwargs):
+        return ClothingItem(**data)
+
+class QuestionSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    question_text = fields.String(required=False)
+    user_id = fields.Integer(required=True)
+    response = fields.String(required=False)
+
+    @post_load
+    def create_question(self, data, **kwargs):
+        return Question(**data)
+    
+review_schema = ReviewSchema()
+reviews_schema = ReviewSchema(many=True)
+clothing_item_schema = ClothingItemSchema()
+clothing_items_schema = ClothingItemSchema(many=True)
+question_schema = QuestionSchema()
+questions_schema = QuestionSchema(many=True)
