@@ -8,7 +8,7 @@ from database.models import db
 from database.schemas import ma
 from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
-from resources.clothing_item import ClothingItemsResource, ClothingItemResource, PostClothingItemResource
+from resources.clothing_item import ClothingItemsResource, ClothingItemResource, PostClothingItemResource, DeleteClothingItemResource
 from resources.review import ReviewsResource, ReviewResource, PostReviewResource
 from resources.question import QuestionsResource, QuestionResource, PostQuestionResource
 from dotenv import load_dotenv
@@ -64,6 +64,7 @@ def create_routes():
     api.add_resource(ClothingItemsResource, '/api/clothing_items')
     api.add_resource(ClothingItemResource, '/api/clothing_item/<int:item_id>')
     api.add_resource(PostClothingItemResource, '/api/post_clothing_item')
+    api.add_resource(DeleteClothingItemResource, '/api/delete_clothing_item/<int:item_id>')
 
     # Review
     api.add_resource(ReviewsResource, '/api/reviews')

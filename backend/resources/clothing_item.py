@@ -1,4 +1,4 @@
-from flask import request
+from flask import request, make_response
 from flask_jwt_extended import jwt_required, get_jwt_identity
 from flask_restful import Resource
 from database.models import db, ClothingItem, User
@@ -31,4 +31,22 @@ class PostClothingItemResource(Resource):
             db.session.commit()
             return clothing_item_schema.dump(new_clothing_item), 201
         else:
-            return {'message': 'You are not an admin, You are not Authorized to add clothing items'}, 401
+            return {'message': 'You are not an admin. You are not Authorized to add clothing items'}, 401
+        
+class DeleteClothingItemResource(Resource):
+    @jwt_required()
+    def delete(self, item_id):
+        current_user = get_jwt_identity()
+        user = User.query.get(current_user)
+        clothing_item = ClothingItem.query.get(item_id)
+        if user.is_admin == True:
+            if clothing_item == None:
+                response = {'message': 'This is not an Item, so you cannot delete'}
+                return make_response(response, 404)
+            else:
+                db.session.delete(clothing_item)
+                db.session.commit()
+                response = {'message': 'Item deleted Successfully!'}
+                return make_response(response, 204)
+        else:
+            return {'message': 'You are not an admin. You are not Authorized to delete clothing items'}, 401

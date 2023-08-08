@@ -1,18 +1,18 @@
 from flask import request
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from flask_restful import Resource
-from database.models import db, Review, User
+from database.models import db, Question, User
 from database.schemas import question_schema, questions_schema
 
 class QuestionsResource(Resource):
     def get(self):
-        questions = Review.query.all()
-        serialized_questions = question_schema.dump(questions)
+        questions = Question.query.all()
+        serialized_questions = questions_schema.dump(questions)
         return serialized_questions, 200
     
 class QuestionResource(Resource):
     def get(self, item_id):
-        question = Review.query.get(item_id)
+        question = Question.query.get(item_id)
         serialized_question = question_schema.dump(question)
         return serialized_question, 200
 

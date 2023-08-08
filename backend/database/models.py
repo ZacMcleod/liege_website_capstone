@@ -56,4 +56,8 @@ class Question(db.Model):
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)
     response = db.Column(db.Text, nullable=True)
     clothing_item_id = db.Column(db.Integer, nullable=True)
-    
+
+class Cart(db.Model):
+    id = db.Column(db.Integer, primary_key=True)
+    clothing_item_id = db.Column(db.Integer, nullable=False)
+    user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

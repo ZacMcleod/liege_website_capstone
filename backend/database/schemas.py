@@ -99,9 +99,15 @@ class QuestionSchema(ma.Schema):
     def create_question(self, data, **kwargs):
         return Question(**data)
     
+class CartSchema(ma.Schema):
+    id = fields.Integer(primary_key=True)
+    clothing_item_id = fields.Integer(required=True)
+    user_id = fields.Integer(required=True)
+    
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
 clothing_item_schema = ClothingItemSchema()
 clothing_items_schema = ClothingItemSchema(many=True)
 question_schema = QuestionSchema()
 questions_schema = QuestionSchema(many=True)
+cart_schema = CartSchema()
