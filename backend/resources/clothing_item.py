@@ -24,10 +24,9 @@ class PostClothingItemResource(Resource):
         current_user = get_jwt_identity()
         user = User.query.get(current_user)
         if user.is_admin == True:
-            user_id = get_jwt_identity()
             form_data = request.get_json()
             new_clothing_item = clothing_item_schema.load(form_data)
-            new_clothing_item.user_id = user_id
+            new_clothing_item.user_id = user
             db.session.add(new_clothing_item)
             db.session.commit()
             return clothing_item_schema.dump(new_clothing_item), 201

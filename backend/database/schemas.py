@@ -93,6 +93,7 @@ class QuestionSchema(ma.Schema):
     question_text = fields.String(required=False)
     user_id = fields.Integer(required=True)
     response = fields.String(required=False)
+    clothing_item_id = fields.Integer(required=False)
 
     @post_load
     def create_question(self, data, **kwargs):

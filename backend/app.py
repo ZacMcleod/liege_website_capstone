@@ -10,6 +10,7 @@ from resources.auth import LoginResource, RegisterResource
 from resources.cars import AllCarResource, UserCarResource
 from resources.clothing_item import ClothingItemsResource, ClothingItemResource, PostClothingItemResource
 from resources.review import ReviewsResource, ReviewResource, PostReviewResource
+from resources.question import QuestionsResource, QuestionResource, PostQuestionResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -58,10 +59,19 @@ def create_routes():
     api.add_resource(AllCarResource, '/api/cars')
     api.add_resource(UserCarResource, '/api/user_cars')
     # TODO: Create files for your Resources in resources folder, add them here
+
+    # Clothing Item
     api.add_resource(ClothingItemsResource, '/api/clothing_items')
     api.add_resource(ClothingItemResource, '/api/clothing_item/<int:item_id>')
     api.add_resource(PostClothingItemResource, '/api/post_clothing_item')
+
+    # Review
     api.add_resource(ReviewsResource, '/api/reviews')
     api.add_resource(ReviewResource, '/api/review/<int:item_id>')
     api.add_resource(PostReviewResource, '/api/post_review')
+
+    #Question
+    api.add_resource(QuestionsResource, '/api/questions')
+    api.add_resource(QuestionResource, '/api/question/<int:item_id>')
+    api.add_resource(PostQuestionResource, '/api/post_question')
     return api
