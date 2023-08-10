@@ -26,7 +26,7 @@ class PostClothingItemResource(Resource):
         if user.is_admin == True:
             form_data = request.get_json()
             new_clothing_item = clothing_item_schema.load(form_data)
-            new_clothing_item.user_id = user
+            new_clothing_item.user_id = user.id
             db.session.add(new_clothing_item)
             db.session.commit()
             return clothing_item_schema.dump(new_clothing_item), 201

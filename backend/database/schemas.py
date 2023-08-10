@@ -1,6 +1,6 @@
 from flask_marshmallow import Marshmallow
 from marshmallow import post_load, fields
-from database.models import User, Car, Review, Question, ClothingItem
+from database.models import User, Car, Review, Question, ClothingItem, CartItem
 
 ma = Marshmallow()
 
@@ -80,7 +80,7 @@ class ClothingItemSchema(ma.Schema):
     description = fields.String(required=True)
     color = fields.String(required=True)
     size = fields.String(required=True)
-    date = fields.Date(required=False)
+    year = fields.Integer(required=True)
     price = fields.Float(required=True)
     picture = fields.String(required=True)
 
@@ -99,10 +99,21 @@ class QuestionSchema(ma.Schema):
     def create_question(self, data, **kwargs):
         return Question(**data)
     
-class CartSchema(ma.Schema):
+class CartItemSchema(ma.Schema):
     id = fields.Integer(primary_key=True)
-    clothing_item_id = fields.Integer(required=True)
+    clothing_item_id = fields.Integer(required=True) # Not sure if will need nested json objects for the Frontend...
+    type = fields.String(required=True)
+    description = fields.String(required=True)
+    color = fields.String(required=True)
+    size = fields.String(required=True)
+    year = fields.Integer(required=True)
+    price = fields.Float(required=True)
+    picture = fields.String(required=True)
     user_id = fields.Integer(required=True)
+
+    @post_load
+    def create_cart_item(self, data, **kwargs):
+        return CartItem(**data)
     
 review_schema = ReviewSchema()
 reviews_schema = ReviewSchema(many=True)
@@ -110,4 +121,5 @@ clothing_item_schema = ClothingItemSchema()
 clothing_items_schema = ClothingItemSchema(many=True)
 question_schema = QuestionSchema()
 questions_schema = QuestionSchema(many=True)
-cart_schema = CartSchema()
+cart_item_schema = CartItemSchema()
+cart_items_schema = CartItemSchema(many=True)

@@ -39,7 +39,7 @@ class ClothingItem(db.Model):
     description = db.Column(db.Text, nullable=False)
     color = db.Column(db.String(255), nullable=False)
     size = db.Column(db.String(255), nullable=False)
-    date = db.Column(db.Date, nullable=True)
+    year = db.Column(db.Integer, nullable=False)
     price = db.Column(db.Float, nullable=False)
     picture = db.Column(db.String(255), nullable=False)
 
@@ -57,7 +57,14 @@ class Question(db.Model):
     response = db.Column(db.Text, nullable=True)
     clothing_item_id = db.Column(db.Integer, nullable=True)
 
-class Cart(db.Model):
+class CartItem(db.Model):
     id = db.Column(db.Integer, primary_key=True)
     clothing_item_id = db.Column(db.Integer, nullable=False)
+    type = db.Column(db.String(255), nullable=False)
+    description = db.Column(db.Text, nullable=False)
+    color = db.Column(db.String(255), nullable=False)
+    size = db.Column(db.String(255), nullable=False)
+    year = db.Column(db.Integer, nullable=False)
+    price = db.Column(db.Float, nullable=False)
+    picture = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

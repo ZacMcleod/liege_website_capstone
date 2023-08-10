@@ -11,6 +11,7 @@ from resources.cars import AllCarResource, UserCarResource
 from resources.clothing_item import ClothingItemsResource, ClothingItemResource, PostClothingItemResource, DeleteClothingItemResource
 from resources.review import ReviewsResource, ReviewResource, PostReviewResource
 from resources.question import QuestionsResource, QuestionResource, PostQuestionResource
+from resources.cart_item import CartItemsResource, CartItemResource, PostCartItemResource, DeleteCartItemResource
 from dotenv import load_dotenv
 from os import environ
 
@@ -71,8 +72,14 @@ def create_routes():
     api.add_resource(ReviewResource, '/api/review/<int:item_id>')
     api.add_resource(PostReviewResource, '/api/post_review')
 
-    #Question
+    # Question
     api.add_resource(QuestionsResource, '/api/questions')
     api.add_resource(QuestionResource, '/api/question/<int:item_id>')
     api.add_resource(PostQuestionResource, '/api/post_question')
+
+    # Cart Item
+    api.add_resource(CartItemsResource, '/api/cart_items')
+    api.add_resource(CartItemResource, '/api/cart_item/<int:item_id>')
+    api.add_resource(PostCartItemResource, '/api/post_cart_item')
+    api.add_resource(DeleteCartItemResource, '/api/delete_cart_item/<int:item_id>')
     return api

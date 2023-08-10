@@ -11,17 +11,25 @@ const Navbar = () => {
     <div className="navBar">
       <ul>
         <li className="brand">
-          <Link to="/" style={{ textDecoration: "none", color: "white" }}>
-            <b>React/Flask JWT</b>
-          </Link>
+          <button onClick={() => navigate("/cart")}>Shopping Cart</button>
         </li>
-        <li>
-          {user ? (
-            <button onClick={logoutUser}>Logout</button>
-          ) : (
-            <button onClick={() => navigate("/login")}>Login</button>
-          )}
-        </li>
+          <li className="brand">
+            <Link to="/" style={{ textDecoration: "none", color: "white" }}>
+              <h1>LIEGE</h1>
+            </Link>
+          </li>
+          <li>
+            {user ? (
+              <button onClick={logoutUser}>Logout</button>
+            ) : (
+              <button onClick={() => navigate("/login")}>Login</button>
+            )}
+            {user ? (
+              <b></b>
+            ) : (
+              <button onClick={() => navigate("/register")}>Sign Up</button>
+            )}
+          </li>
       </ul>
     </div>
   );
