@@ -7,7 +7,9 @@ import HomePage from "./pages/HomePage/HomePage";
 import LoginPage from "./pages/LoginPage/LoginPage";
 import RegisterPage from "./pages/RegisterPage/RegisterPage";
 import CartPage from "./pages/CartPage/CartPage";
-import ClothingItemDetailsPage from "./pages/ClothingItemDetailsPage/ClothingItemDetailsPage"
+import ClothingItemDetailsPage from "./pages/ClothingItemDetailsPage/ClothingItemDetailsPage";
+import ReviewPage from "./pages/ReviewPage/ReviewPage";
+import QuestionPage from "./pages/QuestionPage/QuestionPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -21,11 +23,13 @@ function App() {
     <div>
       <Navbar />
       <Routes>
-        <Route path="/cart" element={<PrivateRoute> <CartPage /> </PrivateRoute>} />
         <Route path="/" element={<HomePage />} />
+        <Route path="/cart" element={<PrivateRoute> <CartPage /> </PrivateRoute>} />
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
-        <Route path="/clothing_item:<int:item_id>" element={<ClothingItemDetailsPage />} />
+        <Route path="/clothing_item/:item_id" element={<ClothingItemDetailsPage />} />
+        <Route path="/review/:item_id" element={< ReviewPage/>} />
+        <Route path="/question/:item_id" element={<PrivateRoute> <QuestionPage /> </PrivateRoute>} />
       </Routes>
       <Footer />
     </div>

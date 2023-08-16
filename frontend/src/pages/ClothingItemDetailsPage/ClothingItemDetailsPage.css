@@ -1,0 +1,27 @@
+.imgSizing-details {
+    max-width: 500px;
+    margin-left: 10rem;
+}
+
+.clothingDetails-flex {
+    display: flex;
+    flex-direction: row;
+    margin-left: 10rem;
+}
+
+.textFlex {
+    margin-left: 6rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+.textFlexDescription {
+    margin-left: 20rem;
+    margin-top: 1rem;
+    margin-bottom: 1rem;
+}
+
+
+.textFlex-container {
+    margin-top: 5rem;
+}

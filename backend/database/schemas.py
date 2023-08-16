@@ -109,7 +109,7 @@ class CartItemSchema(ma.Schema):
     year = fields.Integer(required=True)
     price = fields.Float(required=True)
     picture = fields.String(required=True)
-    user_id = fields.Integer(required=True)
+    user_id = fields.Integer(required=False)
 
     @post_load
     def create_cart_item(self, data, **kwargs):

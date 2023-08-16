@@ -1,8 +1,9 @@
-from flask import request, make_response
+from flask import request, make_response, jsonify
 from flask_jwt_extended import jwt_required, get_jwt_identity, verify_jwt_in_request
 from flask_restful import Resource
 from database.models import db, CartItem, User
 from database.schemas import cart_item_schema, cart_items_schema
+from marshmallow import ValidationError
 
 class CartItemsResource(Resource):
     @jwt_required()
@@ -31,7 +32,11 @@ class PostCartItemResource(Resource):
         current_user = get_jwt_identity()
         user = User.query.get(current_user)
         form_data = request.get_json()
-        new_cart_item = cart_item_schema.load(form_data)
+        try:
+            new_cart_item = cart_item_schema.load(form_data)
+        except ValidationError as e:
+            print(e.messages)
+            return jsonify(e.messages), 422
         new_cart_item.user_id = user.id
         db.session.add(new_cart_item)
         db.session.commit()

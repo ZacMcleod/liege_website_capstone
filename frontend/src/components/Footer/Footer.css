@@ -1,9 +1,37 @@
 footer {
-  position: fixed;
+  position: bottom;
   bottom: 0;
   font-size: 1.2rem;
   left: 0;
   padding: 1rem;
   text-align: center;
   width: 100%;
+}
+
+.socialMedia {
+  max-width: 30px;
+  cursor:pointer;
+}
+
+.socialMedia-twitter {
+  max-height: 40px;
+  max-width: 40px;
+  padding: .1rem;
+}
+
+.socialMedia-youtube {
+  max-height: 30px;
+  padding: .1rem;
+  cursor: pointer;
+}
+
+.aligning {
+  display: flex;
+  flex-basis: auto;
+}
+
+.copyright {
+  display: flex;
+  flex-direction: right;
+  flex-flow: row-reverse;
 }

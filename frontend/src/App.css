@@ -10,7 +10,7 @@
 
 html {
   box-sizing: border-box;
-  font-family: "Poppins", sans-serif;
+  font-family: "comic-sans", Georgia, 'Times New Roman', Times, serif;
 }
 
 p {
@@ -19,8 +19,8 @@ p {
 
 button {
   background-color: transparent;
-  border: 2px solid steelblue;
-  color: steelblue;
+  border: 2px solid rgb(17, 30, 40);
+  color: rgb(17, 30, 40);
   font-size: 1rem;
   font-family: inherit;
   max-width: 100px;
@@ -29,13 +29,18 @@ button {
 
 button:hover {
   cursor: pointer;
-  color: white;
-  background-color: steelblue;
+  color: rgb(255, 255, 255);
+  background-color: rgb(184, 210, 255);
+}
+
+button:active {
+  color: rgb(17, 30, 40);
+  transform: scale(1.1);
 }
 
 .container {
   margin: 0 auto;
-  max-width: 600px;
+  max-width: 1200px;
   overflow: auto;
   text-align: center;
 }

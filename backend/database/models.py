@@ -64,7 +64,7 @@ class CartItem(db.Model):
     description = db.Column(db.Text, nullable=False)
     color = db.Column(db.String(255), nullable=False)
     size = db.Column(db.String(255), nullable=False)
-    year = db.Column(db.Integer, nullable=False)
+    year = db.Column(db.Integer, nullable=True)
     price = db.Column(db.Float, nullable=False)
     picture = db.Column(db.String(255), nullable=False)
     user_id = db.Column(db.Integer, db.ForeignKey('user.id'), nullable=False)

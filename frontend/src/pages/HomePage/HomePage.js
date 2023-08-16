@@ -6,7 +6,7 @@ import { useNavigate, Link } from "react-router-dom";
 
 import axios from "axios";
 
-const navigate = useNavigate();
+
 
 const HomePage = () => {
   // The "user" value from this Hook contains the decoded logged in user information (username, first name, id)
@@ -14,6 +14,7 @@ const HomePage = () => {
   //TODO: Add an AddClothingItems Page to add a clothing_item for a logged in user's garage
   const [user, token] = useAuth();
   const [clothingItems, setClothingItems] = useState([]);
+  const navigate = useNavigate();
 
   const [filterType, setFilterType] = useState("all");
   const [filterSize, setFilterSize] = useState("all");
@@ -50,7 +51,7 @@ const HomePage = () => {
   return (
     <div className="container">
       {console.log(user)}
-      <h1>Welcome</h1>
+      <h4>FILTER</h4>
       <div className="filter">
         <label>Types: </label>
         <button onClick={() => setFilterType("all")}>All Types</button>
@@ -95,21 +96,21 @@ const HomePage = () => {
         <button onClick={() => setFilterPrice("all")}>All Prices</button>
         <button onClick={() => setFilterPrice("80")}>$80 or less</button>
         <button onClick={() => setFilterPrice("50")}>$50 or less</button>
-        <button onClick={() => setFilterPrice("20")}>$20 or less</button>
+        <button onClick={() => setFilterPrice("30")}>$30 or less</button>
       </div>
-      {filteredClothingItems.map((filtered_clothing_item) => (
-          <div key={filtered_clothing_item.id} className="clothingItem">
+      {filteredClothingItems.map((filteredClothingItem) => (
+          <div key={filteredClothingItem.id} className="clothingItem">
             <div>
-              <img className="imgSizing" src={filtered_clothing_item.picture} alt=""/>
+              <img className="imgSizing" src={filteredClothingItem.picture} alt=""/>
             </div>
             <div className="clothingItem-description">
-              {filtered_clothing_item.description}
+              {filteredClothingItem.description}
             </div>
             <div>
-              {filtered_clothing_item.type} ${filtered_clothing_item.price}
+              {filteredClothingItem.type} ${filteredClothingItem.price}
             </div>
             <div>
-              <button onClick={() => navigate("/clothing_item:")}></button>
+              <button onClick={() => navigate(`/clothing_item/${filteredClothingItem.id}`)}>View Item Details</button>
             </div>
           </div>
         ))}
