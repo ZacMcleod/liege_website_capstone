@@ -114,7 +114,6 @@ const HomePage = () => {
             </div>
           </div>
         ))}
-        InstaGram, Facebook, ect.
     </div>
   );
 };

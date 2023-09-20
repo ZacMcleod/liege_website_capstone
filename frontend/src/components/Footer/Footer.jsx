@@ -13,7 +13,6 @@ const Footer = () => {
 
   return (
     <footer>
-      <div>-This should be the bottom of the page-</div>
       <div>
         <img src={facebookIcon} className="socialMedia"></img>
         <img src={instagramIcon} className="socialMedia" onClick={() => navigate("/") }></img>

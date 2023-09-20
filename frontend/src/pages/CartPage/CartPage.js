@@ -11,6 +11,7 @@ const CartPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [user, token] = useAuth();
     const { item_id } = useParams();
+    const { totalCost, setTotalCost } = useState(0)
 
     const getCartItems = async () => {
         try {
@@ -20,6 +21,7 @@ const CartPage = () => {
                 },
             });
             setCartItems(response.data);
+            console.log(cartItems)
             setIsLoading(false);
         }
         catch (err){
@@ -40,15 +42,26 @@ const CartPage = () => {
     }
 
     const displayCartItems = () => {
+        const userCartItems = cartItems.filter((cartItem) => cartItem.user_id === user.id);
         return (
-        cartItems.map((cartItem) => (
-            <div key={cartItem.id} className="clothingItem">
-                <img src={cartItem.picture} className="imgSizing-cart"></img>
-                <p>{cartItem.description}</p>
-                <p>{cartItem.type}</p>
-                <h1>${cartItem.price} <button onClick={(() => removeCartItem())}></button></h1>
-            </div>)
-        ));
+        
+            userCartItems.map((cartItem) => (
+                <div className="container">
+                    <div key={cartItem.id} className="clothingItem">
+                        <img src={cartItem.picture} className="imgSizing-cart"></img>
+                        <p>{cartItem.description}</p>
+                        <p>{cartItem.type}</p>
+                        <h1>${cartItem.price} <button onClick={(() => removeCartItem())}></button></h1>
+                    </div>
+                </div>
+        )));
+    };
+
+    const getTotalCost = () => {
+        const result = cartItems.reduce((totalCost, cartItem) => totalCost + cartItem.price, 0)
+        return (
+            result
+        );
     };
 
     useEffect(() => {
@@ -61,6 +74,11 @@ const CartPage = () => {
                     <div>L O A D I N G . . . . .</div>
             ) : (
                     <div>
+                        <div className="container">
+                            <div className="totalCost">
+                            Total Cost: ${getTotalCost()}
+                            </div>
+                        </div>
                         {displayCartItems()}
                     </div>
                 )

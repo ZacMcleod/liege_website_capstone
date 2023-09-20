@@ -20,6 +20,7 @@ const ClothingItemDetailsPage = () => {
     const [getIsLoading, setGetIsLoading] = useState(true);
     const [cartItems, setCartItems] = useState([]);
     
+    
     const getClothingItemDetails = async () => {
         try {
             const response = await axios.get(`http://127.0.0.1:5000/api/clothing_item/${item_id}`);
@@ -42,7 +43,8 @@ const ClothingItemDetailsPage = () => {
                     picture: clothingItem.picture,
                     description: clothingItem.description,
                     size: clothingItem.size,
-                    clothing_item_id: clothingItem.id
+                    clothing_item_id: clothingItem.id,
+                    user_id: user.id
                 };
                 console.log(payload);
                 const response = await axios.post('http://127.0.0.1:5000/api/post_cart_item', payload, {
@@ -94,7 +96,7 @@ const ClothingItemDetailsPage = () => {
 
             
             {postIsLoading ? (
-                <h4 className="textFlexDescription">L O A D I N G . . . . .</h4>
+                <h4 className="textFlexDescription"></h4>
             ) : (
                 <div className="textFlexDescription">Added!</div>
             )}

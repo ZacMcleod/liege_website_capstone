@@ -11,6 +11,7 @@ class User(db.Model):
     last_name = db.Column(db.String(255), nullable=False)
     email = db.Column(db.String(255), nullable=False, unique=True)
     is_admin = db.Column(db.Boolean, nullable=False)
+    cart_item_list = db.relationship('CartItem', backref='user')
 
     def hash_password(self):
         self.password = generate_password_hash(self.password).decode('utf8')

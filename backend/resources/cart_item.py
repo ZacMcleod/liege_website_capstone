@@ -8,7 +8,9 @@ from marshmallow import ValidationError
 class CartItemsResource(Resource):
     @jwt_required()
     def get(self):
-        cart_items = CartItem.query.all()
+        current_user_id = get_jwt_identity()
+        user = User.query.get(current_user_id)
+        cart_items = user.cart_item_list
         serialized_cart_items = cart_items_schema.dump(cart_items)
         if serialized_cart_items != {}:
             return serialized_cart_items, 200
@@ -29,14 +31,15 @@ class CartItemResource(Resource):
 class PostCartItemResource(Resource):
     @jwt_required()
     def post(self):
-        current_user = get_jwt_identity()
-        user = User.query.get(current_user)
+        current_user_id = get_jwt_identity()
+        user = User.query.get(current_user_id)
         form_data = request.get_json()
         try:
             new_cart_item = cart_item_schema.load(form_data)
         except ValidationError as e:
             print(e.messages)
             return jsonify(e.messages), 422
+        
         new_cart_item.user_id = user.id
         db.session.add(new_cart_item)
         db.session.commit()
