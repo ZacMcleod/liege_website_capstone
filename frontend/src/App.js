@@ -10,6 +10,7 @@ import CartPage from "./pages/CartPage/CartPage";
 import ClothingItemDetailsPage from "./pages/ClothingItemDetailsPage/ClothingItemDetailsPage";
 import ReviewPage from "./pages/ReviewPage/ReviewPage";
 import QuestionPage from "./pages/QuestionPage/QuestionPage";
+import AdminPage from "./pages/AdminPage/AdminPage";
 
 // Component Imports
 import Navbar from "./components/NavBar/NavBar";
@@ -28,8 +29,9 @@ function App() {
         <Route path="/register" element={<RegisterPage />} />
         <Route path="/login" element={<LoginPage />} />
         <Route path="/clothing_item/:item_id" element={<ClothingItemDetailsPage />} />
-        <Route path="/review/:item_id" element={< ReviewPage/>} />
+        <Route path="/review/:item_id" element={<ReviewPage />} />
         <Route path="/question/:item_id" element={<PrivateRoute> <QuestionPage /> </PrivateRoute>} />
+        <Route path="/admin" element={<AdminPage />} />
       </Routes>
       <Footer />
     </div>

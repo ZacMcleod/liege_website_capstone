@@ -11,7 +11,9 @@ const CartPage = () => {
     const [isLoading, setIsLoading] = useState(true);
     const [user, token] = useAuth();
     const { item_id } = useParams();
-    const { totalCost, setTotalCost } = useState(0)
+    const [totalCost, setTotalCost] = useState(0)
+    const [sales, setSales] = useState(0);
+    const [salesRevenue, setSalesRevenue] = useState(0);
 
     const getCartItems = async () => {
         try {
@@ -46,7 +48,7 @@ const CartPage = () => {
         return (
         
             userCartItems.map((cartItem) => (
-                <div className="container">
+                <div className="container" key={cartItem.id}>
                     <div key={cartItem.id} className="clothingItem">
                         <img src={cartItem.picture} className="imgSizing-cart"></img>
                         <p>{cartItem.description}</p>
@@ -57,16 +59,36 @@ const CartPage = () => {
         )));
     };
 
-    const getTotalCost = () => {
-        const result = cartItems.reduce((totalCost, cartItem) => totalCost + cartItem.price, 0)
-        return (
-            result
-        );
-    };
+
+    const buy = () => {
+        const result = window.confirm("(insert Credit/Debit/Bank info here) ");
+        if(result) {
+            const currentTotalCost = cartItems.reduce((totalCost, cartItem) => totalCost + cartItem.price, 0);
+            setSales((prevSales) => prevSales + cartItems.length);
+            setSalesRevenue((prevRevenue) => prevRevenue + currentTotalCost);
+
+            localStorage.setItem('sales', JSON.stringify(sales + cartItems.length));
+            localStorage.setItem('salesRevenue', JSON.stringify(salesRevenue + currentTotalCost));
+            return (
+                <div>*Item bought*</div>
+            )
+        }
+        else{
+            return(
+                <div>Transaction Canceled</div>
+            )
+        }
+
+    }
 
     useEffect(() => {
         getCartItems();
         }, []);
+
+    useEffect(() => {
+        const newTotalCost = cartItems.reduce((totalCost, cartItem) => totalCost + cartItem.price, 0);
+        setTotalCost(newTotalCost);
+    }, [cartItems]);
 
     return (
         <div>
@@ -76,8 +98,9 @@ const CartPage = () => {
                     <div>
                         <div className="container">
                             <div className="totalCost">
-                            Total Cost: ${getTotalCost()}
+                                Total Cost: ${totalCost}
                             </div>
+                            <button onClick={buy}>Buy All</button>
                         </div>
                         {displayCartItems()}
                     </div>
