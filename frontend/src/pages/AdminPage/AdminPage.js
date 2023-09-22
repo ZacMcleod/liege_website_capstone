@@ -6,6 +6,12 @@ import { useParams } from 'react-router-dom';
 const AdminPage = () => {
     const [sales, setSales] = useState(0);
     const [salesRevenue, setSalesRevenue] = useState(0);
+    const { user } = useAuth();
+
+    const consoleLog= () => {
+        console.log("User ", user)
+        console.log("is Admin?: ", user?.is_admin);
+    }
 
     useEffect(() => {
         const storedSales = JSON.parse(localStorage.getItem('sales')) || 0;
@@ -15,9 +21,10 @@ const AdminPage = () => {
         setSalesRevenue(storedSalesRevenue);
     }, []);
     return(
-        <div>
+        <div className="container">
             <h1>Hello</h1>
             <h1>Admin Page</h1>
+            <button onClick={consoleLog()}>console.log</button>
             <div>
                 All Sales: {sales} All Sales Revenue: {salesRevenue}
             </div>

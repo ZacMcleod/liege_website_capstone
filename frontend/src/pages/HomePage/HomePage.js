@@ -48,9 +48,22 @@ const HomePage = () => {
     return typeMatches && sizeMatches && colorMatches && yearMatches && priceMatches;
   });
 
+  const ifAdmin = () => {
+    if (user && user.is_admin){
+      return (
+        <button onClick={() => navigate('/admin')} className='container'>Admin Page</button>
+      );
+    }
+    else{
+      return null;
+    }
+  };
+
   return (
     <div className="container">
       {console.log(user)}
+      {ifAdmin()}
+
       <h4>FILTER</h4>
       <div className="filter">
         <label>Types: </label>

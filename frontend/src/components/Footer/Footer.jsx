@@ -20,9 +20,9 @@ const Footer = () => {
         <img src={twitter} className="socialMedia"></img>
         <img src={linkedin} className="socialMedia"></img>
       </div>
-      <div className="copyright">
-        <p>Copyright © 2023</p>{""}
-      </div>
+      
+      <p className="bottomRight">Copyright © 2023</p>
+      
     </footer>
   );
 };

@@ -102,12 +102,13 @@ const ClothingItemDetailsPage = () => {
             )}
             
             <div className="textFlexDescription">
-                <button onClick={() => navigate(`/review/${item_id}`)}>Reviews</button>
+                <div>
+                    <button onClick={() => navigate(`/review/${item_id}`)}>Reviews</button>
+                </div>
+                <div className="textFlex-container">
+                    <button onClick={() => navigate(`/question/${item_id}`)}>Questions?</button>
+                </div>
             </div>
-            <div className="textFlexDescription">
-                <button onClick={() => navigate(`/question/${item_id}`)}>Questions?</button>
-            </div>
-            
         </div>
     )
 }
