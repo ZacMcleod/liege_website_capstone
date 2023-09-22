@@ -1,0 +1,9 @@
+.sales {
+    border: 2px solid rgb(6, 169, 23);
+    border-radius: 2px;
+    padding: .5rem;
+    margin-left: 300px;
+    margin-bottom: .2rem;
+    width: 600px;
+    font-size: 5rem;
+}

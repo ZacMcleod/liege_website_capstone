@@ -21,6 +21,7 @@ const ReviewPage = () => {
             console.log(response.data);
             setReviews(response.data);
             setIsLoading(false);
+            localStorage.setItem('reviews', JSON.stringify(response.data));
         }   
         catch (err) {
             console.error(err);

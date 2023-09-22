@@ -18,6 +18,7 @@ const QuestionPage = () => {
             console.log(response.data);
             setQuestions(response.data);
             setIsLoading(false);
+            localStorage.setItem('questions', JSON.stringify(response.data));
         }   
         catch (err) {
             console.error(err);
@@ -31,8 +32,6 @@ const QuestionPage = () => {
             "question_text": userQuestion,
             "user_id": user.id
         }
-
-
     console.log(postedQuestion);
         try {
             const response = await axios.post('http://127.0.0.1:5000/api/post_question', postedQuestion,{
@@ -43,6 +42,7 @@ const QuestionPage = () => {
             getQuestions()
             console.log(postedQuestion);
             setIsLoading(false);
+            
         }   
         catch (err) {
             console.error(err);
@@ -51,9 +51,10 @@ const QuestionPage = () => {
 
     const questionFilter = (item_id) => {
         const filteredQuestions = questions.filter(q => q.clothing_item_id === Number(item_id))
-        console.log("Filtered Questions", filteredQuestions);
+        
         return filteredQuestions;
     }
+    
 
     useEffect(() => {
         getQuestions();
