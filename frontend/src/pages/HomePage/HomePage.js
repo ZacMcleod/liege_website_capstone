@@ -62,14 +62,14 @@ const HomePage = () => {
   };
 
   return (
-    <div className="container">
+    <div className="container-v2">
       {console.log(user)}
       <div className="admin">
         {ifAdmin()}
       </div>
       <h4 className="admin">FILTER</h4>
-      <div >
-        <div className="filterItem">
+      <div className="filter-container">
+        <div className="filter-section">
           <label>Types: </label>
           <button onClick={() => setFilterType("all")}>All Types</button>
           <button onClick={() => setFilterType("hat")}>Hats</button>
@@ -78,7 +78,7 @@ const HomePage = () => {
           <button onClick={() => setFilterType("sweatpants")}>Sweatpants</button>
           <button onClick={() => setFilterType("shoes")}>Shoes</button>
         </div>
-        <div className="filterItem">
+        <div className="filter-section">
           <label>Sizes</label>
           <button onClick={() => setFilterSize("all")}>All Sizes</button>
           <button onClick={() => setFilterSize("extra small")}>Extra Small</button>
@@ -87,7 +87,7 @@ const HomePage = () => {
           <button onClick={() => setFilterSize("large")}>Large</button>
           <button onClick={() => setFilterSize("extra large")}>Extra Large</button>
         </div>
-        <div className="filterItem">
+        <div className="filter-section">
           <label>Colors: </label>
           <button onClick={() => setFilterColor("all")}>All Colors</button>
           <button onClick={() => setFilterColor("white")}>White</button>
@@ -100,7 +100,7 @@ const HomePage = () => {
           <button onClick={() => setFilterColor("purple")}>Purple</button>
           <button onClick={() => setFilterColor("pink")}>Pink</button>
         </div>
-        <div className="filterItem">
+        <div className="filter-section">
           <label>Release Years: </label>
           <button onClick={() => setFilterYear("all")}>All Years</button>
           <button onClick={() => setFilterYear("2020")}>2020</button>
@@ -108,7 +108,7 @@ const HomePage = () => {
           <button onClick={() => setFilterYear("2022")}>2022</button>
           <button onClick={() => setFilterYear("2023")}>2023</button>
         </div>
-        <div className="filterItem">
+        <div className="filter-section">
           <label>Price: </label>
           <button onClick={() => setFilterPrice("all")}>All Prices</button>
           <button onClick={() => setFilterPrice("80")}>$80 or less</button>
